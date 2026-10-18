@@ -1,0 +1,882 @@
+/* ================================================================
+   header.css — Fixed Navbar Styling
+   Tokai Teio Theme: Auburn border, Pink hover, Glassmorphism bg
+   ================================================================ */
+
+/* ── 1. Header Base ───────────────────────────────────────────── */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: var(--z-header);
+    background: rgba(13, 13, 18, 0.80);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(139, 37, 54, 0.40);
+    transition:
+        height var(--ease-base),
+        background var(--ease-base),
+        border-color var(--ease-base),
+        box-shadow var(--ease-base);
+}
+
+/* Shrunk state when user scrolls down */
+.site-header.scrolled {
+    height: 58px;
+    background: rgba(13, 13, 18, 0.96);
+    border-bottom-color: rgba(139, 37, 54, 0.70);
+    box-shadow: 0 4px 24px rgba(139, 37, 54, 0.25);
+}
+
+/* ── 2. Auburn accent line at top of header ───────────────────── */
+.site-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            var(--color-auburn-dark) 0%,
+            var(--color-pink) 50%,
+            var(--color-auburn-dark) 100%);
+    z-index: 1;
+}
+
+/* ── 3. Inner container ───────────────────────────────────────── */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+}
+
+/* ── 4. Logo ──────────────────────────────────────────────────── */
+.site-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    transition: opacity var(--ease-base);
+}
+
+.site-logo:hover {
+    opacity: 0.85;
+}
+
+.logo-placeholder {
+    width: 210px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.logo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Fallback text if logo image missing */
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+/* ── 5. Desktop Navigation ────────────────────────────────────── */
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    font-family: var(--font-body);
+    font-size: var(--size-sm);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    position: relative;
+    transition: color var(--ease-base), background var(--ease-base);
+}
+
+/* Animated underline bar */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--grad-brand);
+    border-radius: var(--radius-pill);
+    transform: translateX(-50%);
+    transition: width var(--ease-base);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 60%;
+}
+
+/* Derby Cup Special Nav Link */
+.nav-link-derby {
+    color: #f59e0b !important;
+}
+
+.nav-link-derby:hover {
+    color: #fde047 !important;
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+}
+
+.nav-link-derby i {
+    font-size: 0.85rem;
+    margin-right: 2px;
+}
+
+/* ── 5.1 Right Action Bar & Profile Hub ───────────────────────── */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.header-btn {
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+/* Admin Quick Switch Button */
+.header-btn-admin {
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.45);
+    color: #f59e0b !important;
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.15);
+}
+
+.header-btn-admin:hover {
+    background: #f59e0b;
+    color: #0b0c13 !important;
+    box-shadow: 0 4px 18px rgba(245, 158, 11, 0.5);
+    transform: translateY(-1px);
+}
+
+.header-btn-admin i {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+
+.header-btn-admin:hover i {
+    transform: rotate(45deg);
+}
+
+/* Play Now Primary CTA */
+.header-btn-play {
+    background: linear-gradient(135deg, #FF4B82 0%, #D81B60 100%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(255, 75, 130, 0.35);
+}
+
+.header-btn-play:hover {
+    background: linear-gradient(135deg, #ff6699 0%, #e11d48 100%);
+    box-shadow: 0 6px 22px rgba(255, 75, 130, 0.6);
+    transform: translateY(-1px) scale(1.02);
+}
+
+.header-btn-play i {
+    font-size: 0.75rem;
+}
+
+/* Login Button for Guests */
+.header-btn-login {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-primary) !important;
+}
+
+.header-btn-login:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-pink);
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+/* Unified User Capsule */
+.header-user-capsule {
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 6px 3px 6px;
+    background: rgba(20, 20, 32, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.header-user-capsule:hover {
+    border-color: rgba(255, 102, 163, 0.4);
+    box-shadow: 0 4px 14px rgba(255, 102, 163, 0.25);
+}
+
+.header-user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B2536, #FF66A3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.82rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-user-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    max-width: 95px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 2px;
+}
+
+.header-user-badge {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #0b0c13;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 1px 4px rgba(245, 158, 11, 0.4);
+}
+
+.header-logout-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(239, 68, 68, 0.14);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.header-logout-btn:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+    transform: scale(1.08);
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+}
+
+/* ── 6. Hamburger Button (Mobile) ────────────────────────────── */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: var(--bg-glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 8px;
+    transition: background var(--ease-base), border-color var(--ease-base);
+    flex-shrink: 0;
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: var(--radius-pill);
+    transition: transform var(--ease-base), opacity var(--ease-base), width var(--ease-base);
+    transform-origin: center;
+}
+
+/* Animated X when open */
+.hamburger.is-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.is-active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.is-active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+.hamburger:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-pink);
+}
+
+/* ── 7. Mobile Navigation Dropdown ───────────────────────────── */
+.mobile-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(13, 13, 18, 0.98);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(139, 37, 54, 0.50);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--ease-slow);
+}
+
+.mobile-nav.is-open {
+    max-height: 400px;
+}
+
+.mobile-menu {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md) var(--container-pad) var(--space-lg);
+    gap: 4px;
+    list-style: none;
+}
+
+.mobile-nav-link {
+    display: block;
+    padding: 14px var(--space-md);
+    font-family: var(--font-body);
+    font-size: var(--size-base);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-radius: var(--radius-md);
+    border-left: 3px solid transparent;
+    transition: all var(--ease-base);
+}
+
+.mobile-nav-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border-left-color: var(--color-pink);
+    padding-left: calc(var(--space-md) + 6px);
+}
+
+.mobile-cta {
+    margin-top: var(--space-sm);
+    background: var(--grad-brand);
+    color: #fff !important;
+    text-align: center;
+    border-left-color: transparent !important;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-pink);
+}
+
+.mobile-cta:hover {
+    background: var(--grad-auburn);
+    color: #fff !important;
+    padding-left: var(--space-md) !important;
+    transform: translateY(-1px);
+}
+
+/* ── 6.1 3-Dots Navigation More Dropdown (Desktop Overflow) ─────── */
+.nav-item-more {
+    position: relative;
+    display: none; /* Mặc định ẩn trên màn hình siêu rộng */
+    list-style: none;
+}
+
+.nav-more-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all var(--ease-base);
+}
+
+.nav-more-btn:hover,
+.nav-item-more.is-open .nav-more-btn {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border-color: var(--color-pink);
+    box-shadow: 0 0 12px rgba(255, 75, 130, 0.35);
+}
+
+.nav-more-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    min-width: 195px;
+    background: rgba(18, 22, 34, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    padding: 6px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1100;
+    backdrop-filter: blur(14px);
+    animation: navMoreSlide 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes navMoreSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-item-more.is-open .nav-more-dropdown {
+    display: flex;
+}
+
+.nav-more-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-radius: 8px;
+    transition: all 0.18s ease;
+}
+
+.nav-more-item:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-more-item.active {
+    color: var(--color-pink);
+    background: rgba(255, 75, 130, 0.12);
+}
+
+.nav-more-item--derby {
+    color: #f59e0b !important;
+}
+
+.nav-more-item--derby:hover {
+    color: #fde047 !important;
+    background: rgba(245, 158, 11, 0.12);
+}
+
+/* ── 8. Responsive Breakpoints & Nav Overflow Collapse ──────────── */
+/* Khi màn hình co hẹp lấn sang User Capsule, ẩn các mục thừa vào nút 3 chấm */
+@media (max-width: 1260px) and (min-width: 861px) {
+    .nav-item-derby,
+    .nav-item-media {
+        display: none !important;
+    }
+
+    .nav-item-more {
+        display: inline-flex !important;
+    }
+
+    .nav-more-item--derby,
+    .nav-more-item--media {
+        display: flex !important;
+    }
+
+    .nav-more-item--chars {
+        display: none;
+    }
+}
+
+@media (max-width: 1080px) and (min-width: 861px) {
+    .nav-item-chars {
+        display: none !important;
+    }
+
+    .nav-more-item--chars {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 860px) {
+    .main-nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --header-height: 60px;
+    }
+
+    .logo-placeholder {
+        width: 120px;
+        height: 36px;
+    }
+}
+
+/* ── 9. Play Now Modal (UI Theo Bản Thiết Kế Chuẩn) ──────────────── */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(6px);
+}
+
+/* Modal Dialog Box */
+.play-now-dialog {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+    max-width: 530px;
+    border-radius: 18px;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
+}
+
+.modal.show .play-now-dialog {
+    transform: translateY(0) scale(1);
+}
+
+/* Vibrant Blue Header */
+.play-modal-header {
+    background: #2563EB;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0 18px;
+    user-select: none;
+}
+
+.play-modal-title {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.play-modal-reload-icon {
+    font-size: 1.05rem;
+    transform: rotate(-30deg);
+}
+
+.play-modal-close-btn {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 900;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.95;
+    padding: 4px 8px;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.play-modal-close-btn:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.15);
+}
+
+/* Body with subtle diagonal stripes pattern */
+.play-modal-body {
+    background-color: #ffffff;
+    background-image: repeating-linear-gradient(
+        -35deg,
+        #ffffff,
+        #ffffff 22px,
+        #f1f4f8 22px,
+        #f1f4f8 44px
+    );
+    padding: 34px 28px 38px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+}
+
+/* Row 1: Logo & App Icon */
+.play-modal-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    width: 100%;
+}
+
+.play-modal-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-modal-logo {
+    height: 64px;
+    max-width: 230px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+}
+
+.play-modal-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-modal-app-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 17px;
+    object-fit: cover;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+}
+
+/* Row 2 & 3: Store Badges Grid */
+.play-store-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 440px;
+}
+
+.play-store-row {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+}
+
+/* Store Badge Button (Black Rounded Rectangle) */
+.store-badge-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 52px;
+    background: #000000;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    box-sizing: border-box;
+}
+
+.store-badge-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.35);
+    background: #141414;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.store-badge-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.store-badge-icon--steam {
+    font-size: 1.85rem;
+    color: #ffffff;
+}
+
+.store-badge-icon--apple {
+    font-size: 2.1rem;
+    color: #ffffff;
+}
+
+.store-badge-icon--svg {
+    display: block;
+}
+
+.store-badge-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.store-badge-content--steam {
+    justify-content: center;
+}
+
+.store-badge-sub {
+    font-size: 0.58rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.85;
+    line-height: 1;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.store-brand-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #ffffff;
+    white-space: nowrap;
+    letter-spacing: -0.2px;
+}
+
+.store-brand-title--sm {
+    font-size: 0.88rem;
+}
+
+.font-steam {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: 0.6px;
+    font-size: 1.12rem;
+    font-weight: 800;
+}
+
+.store-tm {
+    font-size: 0.55em;
+    margin-left: 1px;
+    vertical-align: super;
+}
+
+@media (max-width: 480px) {
+    .play-store-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .play-modal-brand-row {
+        gap: 16px;
+    }
+
+    .play-modal-logo {
+        height: 50px;
+    }
+
+    .play-modal-app-icon {
+        width: 56px;
+        height: 56px;
+    }
+}

@@ -1,0 +1,525 @@
+/* ================================================================
+   global.css — Design System Foundation
+   Umamusume: Pretty Derby | Tokai Teio Theme
+   Colors: Auburn (#8B2536) × Pink Ribbon (#FF66A3) × Deep Dark
+   ================================================================ */
+
+/* ── Google Fonts (declared in header, referenced here) ──────── */
+/* Cinzel      → Epic headings (Japanese game vibe)              */
+/* Outfit      → Clean UI labels, nav, badges                    */
+/* Noto Sans JP→ Japanese body copy fallback                     */
+
+/* ── 1. CSS Custom Properties (Design Tokens) ────────────────── */
+:root {
+    /* == Brand Palette == */
+    --color-auburn:       #8B2536;       /* Teio primary auburn */
+    --color-auburn-dark:  #6A1A28;       /* Deeper auburn for hover states */
+    --color-auburn-light: #B03348;       /* Lighter auburn for gradients */
+    --color-pink:         #FF66A3;       /* Teio pink ribbon highlight */
+    --color-pink-light:   #FFB3D4;       /* Soft pink for accents */
+    --color-pink-dark:    #E0457F;       /* Deep pink for hover */
+    --color-gold:         #F5C842;       /* Trophy/winner accent gold */
+    --color-gold-dim:     #C9A227;       /* Muted gold */
+
+    /* == Background System == */
+    --bg-base:            #0D0D12;       /* Near-black site base */
+    --bg-surface:         #13131C;       /* Cards / panels */
+    --bg-surface-2:       #1C1C2A;       /* Nested panels / hover */
+    --bg-overlay:         rgba(13, 13, 18, 0.88);  /* Semi-transparent overlay */
+    --bg-glass:           rgba(255, 255, 255, 0.04); /* Glassmorphism tint */
+
+    /* == Text Colors == */
+    --text-primary:       #F0EAF5;       /* Off-white for main body */
+    --text-secondary:     #A89BBB;       /* Muted purple-grey */
+    --text-muted:         #6B607C;       /* Dimmed labels */
+    --text-accent:        var(--color-pink); /* Accent links / highlights */
+    --text-invert:        #0D0D12;       /* Dark text on light bg */
+
+    /* == Typography Scale == */
+    --font-heading:       'Cinzel', 'Noto Serif JP', serif;
+    --font-body:          'Outfit', 'Noto Sans JP', 'Segoe UI', sans-serif;
+    --font-mono:          'Courier New', monospace;
+
+    --size-xs:    0.75rem;   /* 12px */
+    --size-sm:    0.875rem;  /* 14px */
+    --size-base:  1rem;      /* 16px */
+    --size-md:    1.125rem;  /* 18px */
+    --size-lg:    1.375rem;  /* 22px */
+    --size-xl:    1.75rem;   /* 28px */
+    --size-2xl:   2.25rem;   /* 36px */
+    --size-3xl:   3rem;      /* 48px */
+    --size-4xl:   4rem;      /* 64px */
+    --size-5xl:   5.5rem;    /* 88px */
+
+    /* == Spacing Scale == */
+    --space-xs:   0.25rem;
+    --space-sm:   0.5rem;
+    --space-md:   1rem;
+    --space-lg:   1.5rem;
+    --space-xl:   2.5rem;
+    --space-2xl:  4rem;
+    --space-3xl:  6rem;
+    --space-4xl:  8rem;
+
+    /* == Border Radius == */
+    --radius-sm:  4px;
+    --radius-md:  8px;
+    --radius-lg:  16px;
+    --radius-xl:  24px;
+    --radius-pill: 9999px;
+
+    /* == Transitions == */
+    --ease-fast:  150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-base:  300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-slow:  500ms cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* == Shadows == */
+    --shadow-sm:  0 2px 8px rgba(139, 37, 54, 0.20);
+    --shadow-md:  0 4px 24px rgba(139, 37, 54, 0.30);
+    --shadow-lg:  0 8px 48px rgba(139, 37, 54, 0.40);
+    --shadow-pink: 0 0 24px rgba(255, 102, 163, 0.35);
+    --shadow-glow: 0 0 40px rgba(255, 102, 163, 0.20);
+
+    /* == Z-index Scale == */
+    --z-base:     1;
+    --z-raised:   10;
+    --z-dropdown: 100;
+    --z-header:   1000;
+    --z-modal:    2000;
+    --z-toast:    3000;
+
+    /* == Layout == */
+    --header-height: 72px;
+    --container-max: 1280px;
+    --container-pad: clamp(1rem, 5vw, 3rem);
+
+    /* == Gradients == */
+    --grad-auburn:  linear-gradient(135deg, var(--color-auburn-dark) 0%, var(--color-auburn-light) 100%);
+    --grad-pink:    linear-gradient(135deg, var(--color-pink-dark) 0%, var(--color-pink-light) 100%);
+    --grad-brand:   linear-gradient(135deg, var(--color-auburn-dark) 0%, var(--color-pink) 100%);
+    --grad-hero:    linear-gradient(180deg, transparent 0%, var(--bg-base) 100%);
+    --grad-dark:    linear-gradient(135deg, #0D0D12 0%, #1A1030 100%);
+
+    /* == Diagonal Clip Paths (Umamusume-style dynamic cuts) == */
+    --clip-diagonal-bottom: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    --clip-diagonal-top:    polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+    --clip-diagonal-both:   polygon(0 3%, 100% 0, 100% 97%, 0 100%);
+    --clip-chevron:         polygon(0 0, 100% 0, 100% 80%, 50% 100%, 0 80%);
+}
+
+/* ── 2. Modern CSS Reset ──────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    font-size: 16px;
+    /* Prevent horizontal overflow */
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+img, video, svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button, input, select, textarea {
+    font: inherit;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ── 3. Typography Base ───────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-primary);
+    letter-spacing: 0.03em;
+}
+
+h1 { font-size: clamp(var(--size-3xl), 6vw, var(--size-5xl)); }
+h2 { font-size: clamp(var(--size-2xl), 4vw, var(--size-4xl)); }
+h3 { font-size: clamp(var(--size-xl),  3vw, var(--size-3xl)); }
+h4 { font-size: var(--size-xl); }
+h5 { font-size: var(--size-lg); }
+h6 { font-size: var(--size-md); }
+
+p {
+    font-size: var(--size-base);
+    color: var(--text-secondary);
+    max-width: 70ch;
+}
+
+/* ── 4. Layout Utilities ──────────────────────────────────────── */
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+}
+
+.section {
+    padding-block: var(--space-4xl);
+    position: relative;
+}
+
+.section--dark {
+    background-color: var(--bg-surface);
+}
+
+.section--diagonal {
+    clip-path: var(--clip-diagonal-both);
+    padding-block: calc(var(--space-4xl) + 3rem);
+    margin-block: -2rem;
+}
+
+/* Flex utilities */
+.flex          { display: flex; }
+.flex-center   { display: flex; align-items: center; justify-content: center; }
+.flex-between  { display: flex; align-items: center; justify-content: space-between; }
+.flex-col      { display: flex; flex-direction: column; }
+.flex-wrap     { flex-wrap: wrap; }
+.gap-sm        { gap: var(--space-sm); }
+.gap-md        { gap: var(--space-md); }
+.gap-lg        { gap: var(--space-lg); }
+.gap-xl        { gap: var(--space-xl); }
+
+/* Grid utilities */
+.grid          { display: grid; }
+
+/* Text utilities */
+.text-center   { text-align: center; }
+.text-left     { text-align: left; }
+.text-right    { text-align: right; }
+.text-upper    { text-transform: uppercase; }
+.text-accent   { color: var(--color-pink); }
+.text-gold     { color: var(--color-gold); }
+.text-muted    { color: var(--text-muted); }
+
+/* ── 5. Section Title System (Umamusume-inspired) ─────────────── */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+}
+
+.section-label {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: var(--size-xs);
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-pink);
+    background: rgba(255, 102, 163, 0.1);
+    border: 1px solid rgba(255, 102, 163, 0.3);
+    padding: 6px 18px;
+    border-radius: var(--radius-pill);
+    margin-bottom: var(--space-md);
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(var(--size-2xl), 4vw, var(--size-4xl));
+    font-weight: 900;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    display: inline-block;
+}
+
+/* Glowing underline accent on section titles */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--grad-brand);
+    border-radius: var(--radius-pill);
+    margin: var(--space-md) auto 0;
+    box-shadow: var(--shadow-pink);
+}
+
+.section-subtitle {
+    font-size: var(--size-md);
+    color: var(--text-secondary);
+    margin-top: var(--space-md);
+    max-width: 55ch;
+    margin-inline: auto;
+}
+
+/* ── 6. Button System ─────────────────────────────────────────── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: 14px 36px;
+    font-family: var(--font-body);
+    font-size: var(--size-sm);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--ease-base);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Shimmer animation on hover */
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform var(--ease-slow);
+}
+.btn:hover::before {
+    transform: translateX(100%);
+}
+
+/* Primary Button — Auburn gradient */
+.btn-primary {
+    background: var(--grad-auburn);
+    color: #fff;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+.btn-primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* CTA Button — Pink gradient (hero call-to-action) */
+.btn-cta {
+    background: var(--grad-brand);
+    color: #fff;
+    font-size: var(--size-base);
+    padding: 18px 52px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-pink), var(--shadow-md);
+    letter-spacing: 0.15em;
+}
+.btn-cta:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: var(--shadow-glow), var(--shadow-lg);
+}
+
+/* Outline Button */
+.btn-outline {
+    background: transparent;
+    color: var(--color-pink);
+    border: 2px solid var(--color-pink);
+}
+.btn-outline:hover {
+    background: var(--color-pink);
+    color: var(--text-invert);
+    transform: translateY(-2px);
+}
+
+/* Ghost Button */
+.btn-ghost {
+    background: var(--bg-glass);
+    color: var(--text-primary);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+}
+
+/* ── 7. Badge / Label System ──────────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    font-size: var(--size-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.badge-event    { background: rgba(245, 200, 66, 0.15); color: var(--color-gold); border: 1px solid rgba(245, 200, 66, 0.4); }
+.badge-update   { background: rgba(139, 37, 54, 0.2);  color: var(--color-auburn-light); border: 1px solid rgba(139, 37, 54, 0.4); }
+.badge-new      { background: rgba(255, 102, 163, 0.15); color: var(--color-pink); border: 1px solid rgba(255, 102, 163, 0.4); }
+.badge-info     { background: rgba(100, 149, 237, 0.15); color: #6495ED; border: 1px solid rgba(100, 149, 237, 0.3); }
+
+/* ── 8. Card Base ─────────────────────────────────────────────── */
+.card {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform var(--ease-base), box-shadow var(--ease-base), border-color var(--ease-base);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 102, 163, 0.25);
+}
+
+/* ── 9. Glassmorphism Panel ───────────────────────────────────── */
+.glass-panel {
+    background: var(--bg-glass);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── 10. Decorative Elements ──────────────────────────────────── */
+
+/* Horseshoe / chevron accent line */
+.deco-line {
+    width: 3px;
+    height: 40px;
+    background: var(--grad-brand);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-pink);
+}
+
+/* Speed streak animation (Umamusume racing vibe) */
+@keyframes speedStreak {
+    0%   { transform: translateX(-120%) skewX(-15deg); opacity: 0; }
+    20%  { opacity: 0.6; }
+    100% { transform: translateX(120%) skewX(-15deg); opacity: 0; }
+}
+
+/* Floating / levitation animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+}
+
+/* Pulse glow animation */
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 102, 163, 0.3); }
+    50%       { box-shadow: 0 0 40px rgba(255, 102, 163, 0.7), 0 0 80px rgba(255, 102, 163, 0.2); }
+}
+
+/* Shimmer text animation */
+@keyframes shimmerText {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+/* Diagonal slide-in */
+@keyframes slideInDiagonal {
+    from { opacity: 0; transform: translate(-30px, 30px); }
+    to   { opacity: 1; transform: translate(0, 0); }
+}
+
+/* Fade up */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Rotate spin (for accent icons) */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── 11. Scrollbar Theming ────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-auburn);
+    border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-pink);
+}
+
+/* ── 12. Selection Color ──────────────────────────────────────── */
+::selection {
+    background: rgba(255, 102, 163, 0.30);
+    color: #fff;
+}
+
+/* ── 13. Focus Visible (Accessibility) ───────────────────────── */
+:focus-visible {
+    outline: 2px solid var(--color-pink);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+/* ── 14. Media Placeholder (Fallback) ────────────────────────── */
+.media-placeholder {
+    background: var(--bg-surface-2);
+    border: 2px dashed rgba(255,255,255,0.12);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: var(--size-sm);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-md);
+}
+
+/* ── 15. Responsive Helpers ───────────────────────────────────── */
+@media (max-width: 1024px) {
+    :root { --container-pad: clamp(1rem, 4vw, 2rem); }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --container-pad: 1.25rem;
+        --space-4xl: 5rem;
+        --space-3xl: 3.5rem;
+    }
+    .section { padding-block: var(--space-3xl); }
+}
+
+@media (max-width: 480px) {
+    :root { --space-4xl: 4rem; }
+}

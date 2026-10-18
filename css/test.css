@@ -1,0 +1,21 @@
+css
+:root {
+  --purple: #6c63ff;   /* Màu chủ đạo – tím */
+  --blue:   #3b82f6;   /* Màu phụ – xanh dương */
+  --green:  #10b981;   /* Thành công, sức khỏe */
+  --orange: #f59e0b;   /* Cảnh báo, giấc ngủ */
+  --red:    #ef4444;   /* Nguy hiểm, nhịp tim */
+  --bg:     #f5f5fa;   /* Nền ứng dụng */
+  --card:   #ffffff;   /* Nền card/panel */
+  --text:   #1a1a2e;   /* Màu chữ chính */
+  --text2:  #6b7280;   /* Màu chữ phụ */
+  --border: #e5e7eb;   /* Viền */
+}
+Khi dark mode được bật, chỉ cần override các biến trong class .dark:
+css
+.dark {
+  --bg:   #0f0f1a;
+  --card: #1a1a2e;
+  --text: #e2e8f0;
+  ...
+}

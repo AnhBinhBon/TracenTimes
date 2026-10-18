@@ -1,0 +1,155 @@
+/* ================================================================
+   footer.css — Site Footer Styling
+   Step 1 stub — full styles coming after Step 5
+   ================================================================ */
+
+/* ── Footer Base ──────────────────────────────────────────────── */
+.site-footer {
+    background-color: #080810;
+    border-top: 1px solid rgba(139, 37, 54, 0.40);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top glow strip */
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-auburn), var(--color-pink), var(--color-auburn), transparent);
+}
+
+/* ── Footer Inner Container ───────────────────────────────────── */
+.footer-inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding: var(--space-3xl) var(--container-pad) var(--space-xl);
+}
+
+/* ── Footer Top Row ───────────────────────────────────────────── */
+.footer-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+}
+
+/* Brand side */
+.footer-brand {
+    flex: 0 0 260px;
+}
+
+.footer-logo-wrap {
+    width: 140px;
+    height: 42px;
+    margin-bottom: var(--space-md);
+}
+
+.footer-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.footer-logo-fallback {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 0.08em;
+}
+
+.footer-tagline {
+    font-size: var(--size-sm);
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 28ch;
+    line-height: 1.6;
+}
+
+/* ── Footer Nav Columns ───────────────────────────────────────── */
+.footer-nav {
+    display: flex;
+    gap: var(--space-2xl);
+    flex-wrap: wrap;
+}
+
+.footer-nav-col h4.footer-nav-title {
+    font-family: var(--font-body);
+    font-size: var(--size-xs);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-auburn-light);
+    margin-bottom: var(--space-md);
+}
+
+.footer-nav-col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.footer-nav-col ul li a {
+    font-size: var(--size-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--ease-base), padding-left var(--ease-base);
+    display: block;
+}
+
+.footer-nav-col ul li a:hover {
+    color: var(--color-pink);
+    padding-left: 6px;
+}
+
+/* ── Footer Divider ───────────────────────────────────────────── */
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    margin-bottom: var(--space-xl);
+}
+
+/* ── Footer Bottom ────────────────────────────────────────────── */
+.footer-bottom {
+    text-align: center;
+}
+
+.copyright {
+    font-size: var(--size-sm);
+    color: var(--text-muted);
+    max-width: none;
+}
+
+.footer-disclaimer {
+    font-size: var(--size-xs);
+    color: var(--text-muted);
+    opacity: 0.6;
+    margin-top: var(--space-sm);
+    max-width: none;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer-brand {
+        flex: none;
+    }
+    .footer-tagline {
+        max-width: none;
+    }
+    .footer-nav {
+        gap: var(--space-xl);
+        justify-content: center;
+    }
+}

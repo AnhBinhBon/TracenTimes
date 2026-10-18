@@ -1,0 +1,13 @@
+/* ================================================================
+   hero.css — Hero Section Styling
+   Stub file — full implementation in Step 3
+   ================================================================ */
+
+/* Placeholder styles so the page renders without errors */
+#hero {
+    min-height: 100vh;
+    background: var(--bg-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

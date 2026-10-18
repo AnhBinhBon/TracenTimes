@@ -1,0 +1,98 @@
+/* ================================================================
+   news.css — News / Announcements Section Styling
+   ================================================================ */
+
+#news {
+    background: var(--bg-surface);
+    position: relative;
+    z-index: 1;
+}
+
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.news-item {
+    background-color: #111111; /* Deep dark grey/black background */
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-left: 4px solid #acc400; /* Lime green accent */
+    transition: transform var(--ease-base), box-shadow var(--ease-base), background-color var(--ease-base);
+}
+
+.news-item:hover {
+    transform: translateX(6px); /* Energetic slide right on hover */
+    background-color: #1a1a1a;
+    box-shadow: var(--shadow-md);
+}
+
+.news-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.news-badge {
+    background-color: #acc400; /* Lime green */
+    color: #111111; /* Dark text for contrast */
+    font-size: var(--size-xs);
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.05em;
+    display: inline-block;
+}
+
+.news-date {
+    color: #ffffff; /* Make time clearly visible */
+    font-size: var(--size-md);
+    font-weight: 600;
+    font-family: var(--font-mono);
+}
+
+.news-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.news-detail {
+    color: #cccccc; /* Main body text detail */
+    font-size: var(--size-base);
+    line-height: 1.6;
+    transition: color var(--ease-base);
+}
+
+.news-item:hover .news-detail {
+    color: #ffffff; /* Brighten text on hover */
+}
+
+/* Responsive Layout */
+@media (min-width: 768px) {
+    .news-item {
+        flex-direction: row;
+        align-items: center; /* Vertically center align since there is no title */
+        gap: 30px;
+        padding: 24px 30px;
+    }
+    
+    .news-meta {
+        flex: 0 0 180px; /* Fixed width for meta info column */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .news-content {
+        margin-top: 0;
+    }
+}
